@@ -1,3 +1,7 @@
+# Website link
+
+The project can be viewed on this link: ...
+
 # Number Guessing Game
 
 This is a simple command-line number guessing game implemented in JavaScript. The game generates a random number between 1 and 100, and the player is tasked with guessing the number. The game provides feedback after each guess and tracks the number of attempts. A scoring system rewards the player based on how quickly they guess the correct number.
@@ -47,11 +51,11 @@ To set up and run this game on your local machine, follow these steps:
    ```bash
    cd number-guessing-game
 
-3. **Open the index.html file in your browser:**:
+3. **Open the index.html file in your browser**:
 
     You can open the file directly by double-clicking it or by dragging it into a web browser.
 
-4. **Open the Console:**:
+4. **Open the Console**:
 
     Since this game is played in the browser's console, open the Developer Tools (usually by pressing **F12** or **Ctrl+Shift+I**) and navigate to the "Console" tab.
 
