@@ -13,46 +13,51 @@ function checkGuess(playerGuess, correctNumber) {
 }
 
 function getPlayerGuess() {
-    let userGuess;
+  let userGuess;
 
-    while(true) {
-        userGuess = prompt('Please guess a random number');
-        userGuess = parseInt(userGuess, 10);
+  while (true) {
+    userGuess = prompt("Please guess a random number");
+    userGuess = parseInt(userGuess, 10);
 
-        if (isNaN(userGuess)) {
-            alert('Invalid input. Please enter a valid number.')
-        } else {
-            return userGuess;
-        }
+    if (isNaN(userGuess)) {
+      alert("Invalid input. Please enter a valid number.");
+    } else {
+      return userGuess;
     }
+  }
 }
 
-
 function game() {
-    const correctAnswer = 'You guessed the number!';
-    const correctNumber = generateRandomNumber();
-    let counter = 0;
-    const maxAttempts = 10;
-    let playerWon = false;
+  const correctAnswer = "You guessed the number!";
+  const correctNumber = generateRandomNumber();
+  let counter = 0;
+  const maxAttempts = 10;
+  let playerWon = false;
+  let finalScore = 100;
 
-    while(counter < maxAttempts) {
-        let playerGuess = getPlayerGuess();
-        counter++;
+  while (counter < maxAttempts) {
+    let playerGuess = getPlayerGuess();
+    counter++;
 
-        let checkPlayerGuess = checkGuess(playerGuess, correctNumber);
-        console.log(checkPlayerGuess);
+    let checkPlayerGuess = checkGuess(playerGuess, correctNumber);
+    alert(checkPlayerGuess);
 
-        if (checkPlayerGuess === correctAnswer) {
-            playerWon = true;
-            break;
-        }
-    }
-
-    if (playerWon) {
-        console.log(`Awesome, You won :D with only ${counter} attempts`);
+    if (checkPlayerGuess === correctAnswer) {
+      playerWon = true;
+      break;
     } else {
-        console.log(`Sorry :( you used all your ${counter} attempts. Try again`);
+      finalScore -= 10;
+      alert(`You get -10 points... Your score is ${finalScore}`);
     }
+  }
+
+  if (playerWon) {
+    alert(
+      `Awesome, You won :D with only ${counter} attempts. You get ${finalScore} points`
+    );
+  } else {
+    alert(`Sorry :( you used all your ${counter} attempts. Try again`);
+  }
 }
 
 // start the game
