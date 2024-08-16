@@ -1,6 +1,6 @@
 # Website link
 
-The project can be viewed on this link: ...
+The project can be viewed on this link: https://ahmedshab.github.io/number-guessing-game/
 
 # Number Guessing Game
 
