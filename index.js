@@ -26,3 +26,34 @@ function getPlayerGuess() {
         }
     }
 }
+
+
+function game() {
+    const correctAnswer = 'You guessed the number!';
+    const correctNumber = generateRandomNumber();
+    let counter = 0;
+    const maxAttempts = 10;
+    let playerWon = false;
+
+    while(counter < maxAttempts) {
+        let playerGuess = getPlayerGuess();
+        counter++;
+
+        let checkPlayerGuess = checkGuess(playerGuess, correctNumber);
+        console.log(checkPlayerGuess);
+
+        if (checkPlayerGuess === correctAnswer) {
+            playerWon = true;
+            break;
+        }
+    }
+
+    if (playerWon) {
+        console.log(`Awesome, You won :D with only ${counter} attempts`);
+    } else {
+        console.log(`Sorry :( you used all your ${counter} attempts. Try again`);
+    }
+}
+
+// start the game
+game();
