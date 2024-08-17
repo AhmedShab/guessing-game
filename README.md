@@ -55,10 +55,6 @@ To set up and run this game on your local machine, follow these steps:
 
     You can open the file directly by double-clicking it or by dragging it into a web browser.
 
-4. **Open the Console**:
-
-    Since this game is played in the browser's console, open the Developer Tools (usually by pressing **F12** or **Ctrl+Shift+I**) and navigate to the "Console" tab.
-
 ## Example
   ```bash
     Please guess a random number:
@@ -70,4 +66,4 @@ To set up and run this game on your local machine, follow these steps:
     Please guess a random number:
     > 63
     You guessed the number!
-    Awesome! You won :D with only 3 attempts.
+    Awesome, You won :D with only 3 attempts. You get 70 points.
