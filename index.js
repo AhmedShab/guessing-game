@@ -25,6 +25,7 @@ function checkGuess(playerGuess, correctNumber) {
 }
 
 function quitGame() {
+  // function that quits game (with confirmation from user)
   const playAgain = confirm("Do you really wanna quit??");
   if (!playAgain) return false;
   alert("Thank you for your game!");
@@ -37,6 +38,7 @@ function quitGame() {
  * @returns {number} The validated number guessed by the player.
  */
 function getPlayerGuess(finalScore) {
+  // added finalScore as a parametr because Branko said that it's good user experience to show every time score to user
   let userGuess;
 
   while (true) {
@@ -44,10 +46,8 @@ function getPlayerGuess(finalScore) {
       `Please guess a random number (Your current score: ${finalScore} points)`
     );
 
-    console.log(userGuess);
-
     if (userGuess === null) {
-      return userGuess;
+      return userGuess; // if user press cancel userGuess will take value null if it's true -> we just return this value, if not -> continue our code in this function
     }
     userGuess = parseInt(userGuess, 10);
 
@@ -80,6 +80,7 @@ function game() {
     let playerGuess = getPlayerGuess(finalScore);
 
     while (playerGuess === null) {
+      // i add this loop because if user isn't confident and click one time cancel it's okay but when he clicks this cancel button second time without break game continues and say "Your number is too low". It's not behavior that we expect
       const exit = quitGame();
       if (exit) return;
       else {
