@@ -16,11 +16,11 @@ function generateRandomNumber() {
  */
 function checkGuess(playerGuess, correctNumber) {
   if (playerGuess === correctNumber) {
-    return "You guessed the number!";
+    return "🎉 Bingo! You nailed it! 🎯";
   } else if (playerGuess > correctNumber) {
-    return "Your number is too high(";
+    return "🚀 Whoa! That's a bit too high! Try aiming lower!";
   } else {
-    return "Your number is too low((";
+    return "🎈 So close, but a bit too low! Aim higher!";
   }
 }
 
@@ -33,11 +33,11 @@ function getPlayerGuess() {
   let userGuess;
 
   while (true) {
-    userGuess = prompt("Please guess a random number");
-    userGuess = parseInt(userGuess, 10);
+    userGuess = prompt("Enter a number between 1 and 100 to begin the challenge:");
+    userGuess = parseInt(userGuess, 10);    
 
-    if (isNaN(userGuess)) {
-      alert("Invalid input. Please enter a valid number.");
+    if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+      alert("🤔 Hmm, that doesn't look like a number between 1 and 100. Give it another shot!");
     } else {
       return userGuess;
     }
@@ -54,12 +54,14 @@ function getPlayerGuess() {
  * - The final score is shown if the player wins, otherwise a message indicating the use of all attempts is displayed.
  */
 function game() {
-  const correctAnswer = "You guessed the number!";
+  const correctAnswer = "🎉 Bingo! You nailed it! 🎯";
   const correctNumber = generateRandomNumber();
   let counter = 0;
   const maxAttempts = 10;
   let playerWon = false;
   let finalScore = 100;
+
+  alert("🎉 Welcome to the Number Guessing Game! 🔢 Think you can outsmart the machine? ");
 
   while (counter < maxAttempts) {
     let playerGuess = getPlayerGuess();
@@ -73,16 +75,16 @@ function game() {
       break;
     } else {
       finalScore -= 10;
-      alert(`You get -10 points... Your score is ${finalScore}`);
+      alert(`💥 Ouch! That's -10 points... Your current score is ${finalScore}. Keep going!`);
     }
   }
 
   if (playerWon) {
     alert(
-      `Awesome, You won :D with only ${counter} attempts. You get ${finalScore} points`
+      `🎉 Woohoo! You did it in just ${counter} attempts! Your final score is ${finalScore} points. You're a Number Guessing Pro! 🏆`
     );
   } else {
-    alert(`Sorry :( you used all your ${counter} attempts. Try again`);
+    alert(`😢 Oh no! You've used all ${counter} attempts. Better luck next time!`);
   }
 }
 
