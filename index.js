@@ -1,6 +1,6 @@
 /**
  * Generates a random number between 1 and 100.
- * 
+ *
  * @returns {number} A random integer between 1 and 100.
  */
 function generateRandomNumber() {
@@ -9,7 +9,7 @@ function generateRandomNumber() {
 
 /**
  * Compares the player's guess with the correct number and returns a result message.
- * 
+ *
  * @param {number} playerGuess - The number guessed by the player.
  * @param {number} correctNumber - The correct number to be guessed.
  * @returns {string} A message indicating whether the guess is correct, too high, or too low.
@@ -24,16 +24,31 @@ function checkGuess(playerGuess, correctNumber) {
   }
 }
 
+function quitGame() {
+  const playAgain = confirm("Do you really wanna quit??");
+  if (!playAgain) return false;
+  alert("Thank you for your game!");
+  return true;
+}
+
 /**
  * Prompts the user to guess a number and ensures that the input is a valid number.
- * 
+ *
  * @returns {number} The validated number guessed by the player.
  */
-function getPlayerGuess() {
+function getPlayerGuess(finalScore) {
   let userGuess;
 
   while (true) {
-    userGuess = prompt("Please guess a random number");
+    userGuess = prompt(
+      `Please guess a random number (Your current score: ${finalScore} points)`
+    );
+
+    console.log(userGuess);
+
+    if (userGuess === null) {
+      return userGuess;
+    }
     userGuess = parseInt(userGuess, 10);
 
     if (isNaN(userGuess)) {
@@ -46,7 +61,7 @@ function getPlayerGuess() {
 
 /**
  * Executes the number guessing game where the player has up to 10 attempts to guess the correct number.
- * 
+ *
  * - The game generates a random number between 1 and 100.
  * - The player has a maximum of 10 attempts to guess the number.
  * - The score starts at 100 and decreases by 10 points for each incorrect guess.
@@ -62,7 +77,15 @@ function game() {
   let finalScore = 100;
 
   while (counter < maxAttempts) {
-    let playerGuess = getPlayerGuess();
+    let playerGuess = getPlayerGuess(finalScore);
+
+    while (playerGuess === null) {
+      const exit = quitGame();
+      if (exit) return;
+      else {
+        playerGuess = getPlayerGuess(finalScore);
+      }
+    }
     counter++;
 
     let checkPlayerGuess = checkGuess(playerGuess, correctNumber);
