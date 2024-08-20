@@ -16,43 +16,46 @@ function generateRandomNumber() {
  */
 function checkGuess(playerGuess, correctNumber) {
   if (playerGuess === correctNumber) {
-    return "You guessed the number!";
+    return "🎉 Bingo! You nailed it! 🎯";
   } else if (playerGuess > correctNumber) {
-    return "Your number is too high(";
+    return "🚀 Whoa! That's a bit too high! Try aiming lower!";
   } else {
-    return "Your number is too low((";
+    return "🎈 So close, but a bit too low! Aim higher!";
   }
 }
 
 function quitGame() {
   // function that quits game (with confirmation from user)
-  const playAgain = confirm("Do you really wanna quit??");
-  if (!playAgain) return false;
-  alert("Thank you for your game!");
+  const playAgain = confirm("🚪 Uh-oh! Are you sure you want to leave the adventure so soon? The treasure is just around the corner! 🏴‍☠️");
+
+  if (!playAgain) {
+    alert("🎉 Yay! Glad you're sticking around for more fun! Let's keep going! 🚀");
+    return false
+  }
+  alert("🌟 Thanks for playing, brave adventurer! Until next time, may your path be filled with gold and glory! ✨");
   return true;
 }
 
 /**
  * Prompts the user to guess a number and ensures that the input is a valid number.
- *
- * @returns {number} The validated number guessed by the player.
+ * @param {number} finalScore - The current score of the player.
+ * @returns {number|null} The validated number guessed by the player, or null if the user cancels.
  */
 function getPlayerGuess(finalScore) {
   // added finalScore as a parametr because Branko said that it's good user experience to show every time score to user
   let userGuess;
 
   while (true) {
-    userGuess = prompt(
-      `Please guess a random number (Your current score: ${finalScore} points)`
-    );
-
+    userGuess =  prompt(`🌟 You've got ${finalScore} points left in your magic bag! ✨ Choose a number between 1 and 100 to unlock the next level... or click 'Cancel' to retreat!`);
+    
     if (userGuess === null) {
       return userGuess; // if user press cancel userGuess will take value null if it's true -> we just return this value, if not -> continue our code in this function
     }
+
     userGuess = parseInt(userGuess, 10);
 
-    if (isNaN(userGuess)) {
-      alert("Invalid input. Please enter a valid number.");
+    if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+      alert("🤔 Hmm, that doesn't look like a number between 1 and 100. Give it another shot!");
     } else {
       return userGuess;
     }
@@ -69,23 +72,24 @@ function getPlayerGuess(finalScore) {
  * - The final score is shown if the player wins, otherwise a message indicating the use of all attempts is displayed.
  */
 function game() {
-  const correctAnswer = "You guessed the number!";
+  const correctAnswer = "🎉 Bingo! You nailed it! 🎯";
   const correctNumber = generateRandomNumber();
   let counter = 0;
   const maxAttempts = 10;
   let playerWon = false;
   let finalScore = 100;
 
+  alert("🎉 Welcome to the Number Guessing Game! 🔢 Think you can outsmart the machine? ");
+
   while (counter < maxAttempts) {
     let playerGuess = getPlayerGuess(finalScore);
 
-    while (playerGuess === null) {
-      // i add this loop because if user isn't confident and click one time cancel it's okay but when he clicks this cancel button second time without break game continues and say "Your number is too low". It's not behavior that we expect
+    if (playerGuess === null) {
       const exit = quitGame();
       if (exit) return;
-      else {
-        playerGuess = getPlayerGuess(finalScore);
-      }
+
+      // ask the user to guess again
+      continue;
     }
     counter++;
 
@@ -97,16 +101,16 @@ function game() {
       break;
     } else {
       finalScore -= 10;
-      alert(`You get -10 points... Your score is ${finalScore}`);
+      alert(`💥 Ouch! That's -10 points... Your current score is ${finalScore}. Keep going!`);
     }
-  }
+  }  
 
   if (playerWon) {
     alert(
-      `Awesome, You won :D with only ${counter} attempts. You get ${finalScore} points`
+      `🎉 Woohoo! You did it in just ${counter} attempts! Your final score is ${finalScore} points. You're a Number Guessing Pro! 🏆`
     );
   } else {
-    alert(`Sorry :( you used all your ${counter} attempts. Try again`);
+    alert(`😢 Oh no! You've used all ${counter} attempts. Better luck next time!`);
   }
 }
 
